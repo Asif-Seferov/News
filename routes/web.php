@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\PagesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/anaseife', function () {
-    return view('home._categories');
-})->name('home');
-Route::get('/haqqimizda', function(){
-    return view('layouts.about');
-})->name('about');
-Route::get('/meqaleler', function(){
-    return view('layouts.blogs');
-})->name('blogs');
-Route::get('/elaqe', function(){
-    return view('layouts.contact');
-})->name('contact');
+Route::get('/anaseife', [PagesController::class, 'home'])->name('home');
+Route::get('/haqqimizda', [PagesController::class, 'about'])->name('about');
+Route::get('/meqaleler', [PagesController::class, 'blogs'])->name('blogs');
+Route::get('/elaqe', [PagesController::class, 'contact'])->name('contact');
 
+
+//Admin panel routing
+Route::get('/admin', [HomeController::class, 'index'])->name('adminhome');
