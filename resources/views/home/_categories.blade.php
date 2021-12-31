@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('pages.home')
 
 @section('body')
 <div class="col-lg-6 col-md-6 col-sm6">

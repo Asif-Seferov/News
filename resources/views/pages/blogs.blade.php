@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('pages.home')
 
 @section('body')
 <div class="content_bottom">

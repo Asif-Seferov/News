@@ -12,15 +12,19 @@ class PagesController extends Controller
     }
     //about page
     public function about(){
-        return view('layouts.about');
+        return view('pages.about');
     }
     //blogs page
     public function blogs(){
-        return view('layouts.blogs');
+        return view('pages.blogs');
     }
     //contact page
     public function contact(){
-        return view('layouts.contact');
+        return view('pages.contact');
+    }
+    //register page
+    public function register(){
+        return view('pages.register');
     }
 
 }

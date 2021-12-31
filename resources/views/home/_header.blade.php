@@ -13,6 +13,7 @@
               <li><a href=" {{route('about')}} ">About</a></li>
               <li><a href=" {{route('blogs')}} ">Blogs</a></li>
               <li><a href=" {{route('contact')}} ">Contact</a></li>
+              <li><a href=" {{route('user.register')}} ">Register</a></li>
             </ul>
           </div>
           <div class="header_top_right">
@@ -41,6 +42,7 @@
             <li><a href=" {{route('about')}} ">About</a></li>
             <li><a href=" {{route('blogs')}} ">Blogs</a></li>
             <li><a href=" {{route('contact')}} ">Contact</a></li>
+            <li><a href=" {{route('user.register')}} ">Register</a></li>
           </ul>
         </div>
       </div>
