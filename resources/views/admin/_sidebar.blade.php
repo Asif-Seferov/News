@@ -142,13 +142,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href=" {{route('user.list')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>İstifadəçilərin siyahısı</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href=" {{route('user.add')}} " class="nav-link">
+                <a href=" {{route('user.addPage')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>İstifadəçi əlavə et</p>
                 </a>

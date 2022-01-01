@@ -35,6 +35,8 @@ Route::prefix('users')->group(function () {
 //Admin panel routing
 Route::get('/admin', [HomeController::class, 'index'])->name('adminhome');
 Route::prefix('admin')->group(function (){
-    Route::get('/istifadeci-elave-et', [HomeController::class, 'getUserAdd'])->name('user.add');
+    Route::get('/istifadeci-elave-et', [HomeController::class, 'getUserAddPage'])->name('user.addPage');
+    Route::post('/istifadeci', [HomeController::class, 'getUserAdd'])->name('user.add');
+    Route::get('/istifadeci-siyahisi', [HomeController::class, 'userList'])->name('user.list');
 });
 
