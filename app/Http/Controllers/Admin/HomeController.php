@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+session_start();
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -48,7 +48,7 @@ class HomeController extends Controller
             Toastr::success('İstifadəçi uqurla əlavə olundu', 'Uqurlu');
             return redirect()->back();
         }catch(\Exception $e){
-            Toaster::error('İstifadəçi əlavə olunarkən xəta baş verdi');
+            Toastr::error('İstifadəçi əlavə olunarkən xəta baş verdi');
             return redirect()->back();
         }  
     }
@@ -56,6 +56,25 @@ class HomeController extends Controller
     public function userList(){
         $userLists = User::all();
         return view('admin.users.user_list', compact('userLists'));
+    }
+    //delete users
+    public function userDelete(Request $request){
+        try{
+            $user_id = $request->data;
+            $user = User::findOrFail($user_id);
+            $deleted = $user->delete();
+
+        return response()->json([
+            'status'=>'success',
+            'message'=>'İstifadəçi uğurla silindi',
+        ]);
+        }catch(\Exception $e){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'İstifadəçi silinərkən xəta baş verdi',
+            ]);
+        }
+        
     }
      
 }

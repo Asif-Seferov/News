@@ -41,12 +41,9 @@
         <button type="submit" id="userButton" class="btn btn-success mb-3">Qeydiyyatdan keç</button>
     </form>
     </div>
-   <!--  <script>
-        $(document).ready(function(){
-            Toastr::success('message', 'title', ['options']);
-        });
-    </script> -->
+   
 @endsection
+
 
     
 
