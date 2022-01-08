@@ -40,5 +40,7 @@ Route::prefix('admin')->group(function (){
     Route::post('/istifadeci', [HomeController::class, 'getUserAdd'])->name('user.add');
     Route::get('/istifadeci-siyahisi', [HomeController::class, 'userList'])->name('user.list');
     Route::post('/user-delete', [HomeController::class, 'userDelete'])->name('user.delete');
+    Route::get('/user-edit/{id}', [HomeController::class, 'userEdit'])->name('user.edit');
+    Route::post('/user-update/{id}', [HomeController::class, 'userUpdate'])->name('user.update');
 });
 

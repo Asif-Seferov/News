@@ -9,31 +9,30 @@
                     </div>
                 @endisset  
             @endforeach
-        
-        <h5 class="text-secondary mt-3">Qeydiyyat formu</h5>
-    <form action=" {{route('user.add')}} " method="post">
+        <h5 class="text-secondary mt-3">Qeydiyyat formunu yeniləyin</h5>
+    <form action=" {{route('user.update', $user->id)}} " method="post">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Ad</label>
-            <input type="text" class="form-control" id="name" name="name" value=" {{old('name')}} " aria-describedby="emailHelp" placeholder="Ad">
+            <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" aria-describedby="emailHelp" placeholder="Ad">
         </div>
         <div class="mb-3">
             <label for="surname" class="form-label">Soyad</label>
-            <input type="text" class="form-control" id="surname" name="surname" value=" {{old('surname')}} " placeholder="Soyad">
+            <input type="text" class="form-control" id="surname" name="surname" value="{{$user->surname}}" placeholder="Soyad">
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" value=" {{old('email')}} ">
+            <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
         </div>
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="password" class="form-label">Şifrə</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
+            <input type="password" class="form-control" id="password" value=" {{$user->password}} " placeholder="Yeni şifrə daxil edin">
+        </div> -->
         <label>Rol</label>
         <div class="mb-3">
-            <select class="form-control" aria-label="Default select example" name="roLId" value=" {{old('roLId')}} ">
+            <select class="form-control" aria-label="Default select example" name="roLId">
                 @foreach($roles as $role)
-                <option value=" {{$role->id}} "> {{$role->rol_name}} </option>
+                <option value=" {{$role->id}} " @if($role->id === $user->roLId) selected @endif> {{$role->rol_name}} </option>
                 @endforeach
             </select>
         </div>
@@ -41,12 +40,12 @@
             <label for="">İstifadəçi durumu</label>
             <div class="form-check form-switch">
                 <label class="switch">
-                    <input type="checkbox" name="user_status">
+                    <input type="checkbox" name="user_status" @if($user->user_status === "on") checked @endif>
                     <span class="slider round"></span>
                 </label>
             </div>
         </div>
-        <button type="submit" id="userButton" class="btn btn-success mb-3">Qeydiyyatdan keç</button>
+        <button type="submit" id="userButton" class="btn btn-success mb-3">Yenilə</button>
     </form>
     </div>
    
