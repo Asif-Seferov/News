@@ -1,9 +1,9 @@
   <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href=" {{route('adminhome')}} " class="brand-link">
       <img src="{{asset('assets')}}/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Xəbərlər</span>
     </a>
 
     <!-- Sidebar -->
@@ -18,7 +18,7 @@
         </div>
       </div>
  <!-- SidebarSearch Form -->
- <div class="form-inline">
+      <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -32,7 +32,51 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
+          
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="fas fa-users"  style="font-size: 22px;"></i>
+              <p style="margin-left: 5px;">
+                İstifadəçilər
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {{route('user.list')}} " class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>İstifadəçilərin siyahısı</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href=" {{route('user.addPage')}} " class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>İstifadəçi əlavə et</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href=" {{route('user.role')}} " class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>İstifadəçi rolları</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href=" {{route('admin_logout')}} " class="nav-link">
+            <i class="fas fa-sign-out-alt" style="font-size: 22px;"></i>
+              <p style="margin-left: 5px;">
+                Çıxış
+              </p>
+            </a>
+          </li>
+          </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <!-- <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
@@ -132,29 +176,6 @@
               </li>
             </ul>
           </li> -->
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="fas fa-users"  style="font-size: 22px;"></i>
-              <p style="margin-left: 5px;">
-                İstifadəçilər
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href=" {{route('user.list')}} " class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>İstifadəçilərin siyahısı</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href=" {{route('user.addPage')}} " class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>İstifadəçi əlavə et</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
@@ -653,9 +674,4 @@
               <p>Informational</p>
             </a>
           </li> -->
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+       

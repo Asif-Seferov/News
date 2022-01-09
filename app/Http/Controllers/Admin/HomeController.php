@@ -68,25 +68,45 @@ class HomeController extends Controller
     }
     //user edit
     public function userEdit($id){
-        $roles = Role::all();
+       // $roles = Role::all();
         $user = User::find($id) ?? abort(404, 'Belə bir istifadəçi mövcud deyil');
-        return view('admin.users.user-edit', compact('roles', 'user'));
+        return view('admin.users.user-edit', compact('user'));
     }
     //user update
     public function userUpdate(Request $request, $id){
+        //Validation user form
+        
+        $validation = [
+            'name'=>'required | min:3 | max:20',
+            'surname'=>'required | min:5 | max:25',
+            'email'=>'required | email',
+            //'password'=>'required | min:8',
+            'roLId'=>'required'
+        ];
+        
+        
+        if(!empty($request->password))
+            $validation['password'] = 'required min:8';
+
+        $request->validate($validation);
+
+
         try{
             $name = $request->name;
             $surname = $request->surname;
             $email = $request->email;
-            $password = $request->password;
             $roLId = $request->roLId;
             $userStatus = $request->user_status;
+        
 
             $user = User::find($id);
             $user->name = $name;
             $user->surname = $surname;
             $user->email = $email;
-            $user->password = Hash::make($password);
+            
+            if(!empty($request->password))
+                $user->password = $request->password;
+
             $user->roLId = $roLId;
             $user->user_status = $userStatus == 'on' ? 'on' : 'off';
             $user->update();

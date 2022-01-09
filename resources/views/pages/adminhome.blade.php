@@ -42,9 +42,21 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      @include('admin._header')
-      @include('admin._sidebar')
-      @yield('content')
+   
+        @include('admin._header')
+        @include('admin._sidebar')
+            <!-- Content Wrapper. Contains page content -->
+              <div class="content-wrapper">
+          
+                <!-- Main content -->
+                <section class="content">
+                  <div class="container-fluid">
+                      @yield('content')
+                      
+                </div><!-- /.container-fluid -->
+                </section>
+              </div>
+               <!-- /.content-wrapper -->
       @include('admin._footer')
     </div>
 <!-- ./wrapper -->

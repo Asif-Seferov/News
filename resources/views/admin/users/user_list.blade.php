@@ -2,36 +2,39 @@
 @extends('pages.adminhome')
 @section('content')
     
-    <div class="user_list">
-        <h5 class="text-secondary mt-3 mb-3">İstifadəçilərin siyahısı</h5>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                <th scope="col">Ad, soyad</th>
-                <th scope="col">Rolu</th>
-                <th scope="col">Statusu</th>
-                <th scope="col">Yaranma tarixi</th>
-                <th scope="col">Seçimlər</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($userLists as $userList)
-                <tr id="item-{{$userList->id}}">
-                    <td> {{ $userList->name.' '.$userList->surname }} </td>
-                    <td> {{ $userList->getRoLId->rol_name }} </td>
-                    <td> {{ $userList->user_status }} </td>
-                    <td> {{ $userList->created_at  }} </td>
-                    <td>
-                        <a href=" {{route('user.edit', $userList->id)}} " class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a> &nbsp;
-                        <!--<input type="hidden" class="user_delete_value" value=" {{$userList->id}} ">-->
-                        <a href="#" data-id="{{$userList->id}}" data-item="#item-{{$userList->id}}" class="btn btn-danger btn-sm btn_sm_users delete_user"><i class="fas fa-user-minus"></i></a>
-                    </td>
-                </tr>
-                @endforeach
-                
-            </tbody>
-        </table>
-    </div>
+    
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="text-secondary mt-3 mb-3">İstifadəçilərin siyahısı</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                        <th scope="col">Ad, soyad</th>
+                        <th scope="col">Rolu</th>
+                        <th scope="col">Statusu</th>
+                        <th scope="col">Yaranma tarixi</th>
+                        <th scope="col">Seçimlər</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($userLists as $userList)
+                        <tr id="item-{{$userList->id}}">
+                            <td> {{ $userList->name.' '.$userList->surname }} </td>
+                            <td> {{ $userList->getRoLId->rol_name }} </td>
+                            <td> {{ $userList->user_status }} </td>
+                            <td> {{ $userList->created_at  }} </td>
+                            <td>
+                                <a href=" {{route('user.edit', $userList->id)}} " class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a> &nbsp;
+                                <!--<input type="hidden" class="user_delete_value" value=" {{$userList->id}} ">-->
+                                <a href="#" data-id="{{$userList->id}}" data-item="#item-{{$userList->id}}" class="btn btn-danger btn-sm btn_sm_users delete_user"><i class="fas fa-user-minus"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+   
 
     @endsection
 

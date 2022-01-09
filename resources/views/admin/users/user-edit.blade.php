@@ -24,14 +24,14 @@
             <label for="email" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}">
         </div>
-        <!-- <div class="mb-3">
+         <!-- <div class="mb-3">
             <label for="password" class="form-label">Şifrə</label>
             <input type="password" class="form-control" id="password" value=" {{$user->password}} " placeholder="Yeni şifrə daxil edin">
-        </div> -->
+        </div>  -->
         <label>Rol</label>
         <div class="mb-3">
             <select class="form-control" aria-label="Default select example" name="roLId">
-                @foreach($roles as $role)
+                @foreach($user->getRoLId->all() as $role)
                 <option value=" {{$role->id}} " @if($role->id === $user->roLId) selected @endif> {{$role->rol_name}} </option>
                 @endforeach
             </select>

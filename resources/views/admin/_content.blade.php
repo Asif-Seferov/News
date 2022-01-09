@@ -1,5 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -18,9 +17,7 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
+    
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-3 col-6">
@@ -596,10 +593,8 @@
             <!-- /.card -->
           </section>
           <!-- right col -->
-        </div>
+          </div>
         <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+    
+   
+ 
