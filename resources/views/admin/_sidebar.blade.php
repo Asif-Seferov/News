@@ -14,7 +14,7 @@
           <img src="{{asset('assets')}}/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{Auth()->user()->email}} </a>
         </div>
       </div>
  <!-- SidebarSearch Form -->
@@ -32,7 +32,6 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
           <li class="nav-item">
             <a href="" class="nav-link">
               <i class="fas fa-users"  style="font-size: 22px;"></i>
@@ -42,26 +41,39 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            @role('Admin|User')
               <li class="nav-item">
                 <a href=" {{route('user.list')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>İstifadəçilərin siyahısı</p>
                 </a>
               </li>
+              @endrole
+              @role('Admin')
               <li class="nav-item">
                 <a href=" {{route('user.addPage')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>İstifadəçi əlavə et</p>
                 </a>
               </li>
+             
+              
               <li class="nav-item">
                 <a href=" {{route('user.role')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>İstifadəçi rolları</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href=" {{route('permission.list')}} " class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>İstifadəçi icazələri</p>
+                </a>
+              </li>
+             @endrole
             </ul>
           </li>
+          
           <li class="nav-item">
             <a href=" {{route('admin_logout')}} " class="nav-link">
             <i class="fas fa-sign-out-alt" style="font-size: 22px;"></i>

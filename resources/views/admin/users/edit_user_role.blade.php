@@ -16,8 +16,19 @@
                     @csrf
                     <div class="mb-3">
                         <label for="user_role" class="form-label">İstifadəçi rolu</label>
-                        <input type="text" class="form-control" name="user_role" value=" {{$editRole->rol_name}} " id="user_role" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" name="user_role" value=" {{$editRole->name}} " id="user_role" aria-describedby="emailHelp">
                     </div>
+                    
+                    <h3 class="text-center mb-5 text-secondary">İcazələr</h3>
+                    @foreach($permissions as $permission)
+                        <div class="permissions d-flex justify-content-between">
+                                <label class="form-check-label" for="mySwitch" style="font-size: 18px; font-family: Verdana;">{{ $permission->name }}</label>
+                                <label class="switch">
+                                    <input type="checkbox" name="permissions[]" @if($editRole->hasPermissionTo($permission->name)) checked @endif value="{{$permission->id}}" id="mySwitch">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                    @endforeach
                     <button type="submit" class="btn btn-primary">Yenilə</button>
                 </form>
                 </div>

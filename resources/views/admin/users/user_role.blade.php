@@ -10,6 +10,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Rol Adı</th>
+                            <th scope="col">İcazələr</th>
                             <th scope="col">Yaranma tarixi</th>
                             <th scope="col">Yenilənmə tarixi</th>
                             <th scope="col">Seçimlər</th>
@@ -18,7 +19,13 @@
                         <tbody>
                             @foreach($userRoles as $userRole)
                                 <tr id="item-{{$userRole->id}}">
-                                <td> {{ $userRole->rol_name }} </td>
+                                <td> {{ $userRole->name }} </td>
+                                <td> 
+                                    @foreach($userRole->permissions as $permission)
+                                        <span class="badge bg-success" style="font-size: 15px;"> {{ $permission->name }}</span> &nbsp;
+                                    @endforeach
+
+                                </td>
                                 <td>{{ $userRole->created_at }}</td>
                                 <td>{{ $userRole->updated_at }}</td>
                                 <td>

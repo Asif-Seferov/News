@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 session_start();
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+
 use App\Models\User;
-use App\Models\Role;
+
 use Illuminate\Support\Facades\Hash;
 
 
@@ -22,10 +24,10 @@ class HomeController extends Controller
         return view('admin.login');
     }
     //admin register page
-    public function getUserAddPage(){
-        $roles = Role::get();
+     public function getUserAddPage(){
+        $roles = Role::all();
         return view('admin.users.user_add', compact('roles'));
-    }
+    } 
     //add users
     public function getUserAdd(Request $request){
         //Validation user form
@@ -34,7 +36,7 @@ class HomeController extends Controller
             'surname'=>'required | min:5 | max:25',
             'email'=>'required | email',
             'password'=>'required | min:8',
-            'roLId'=>'required'
+            //'roLId'=>'required'
         ]);
 
         try{
@@ -42,7 +44,7 @@ class HomeController extends Controller
             $surname = $request->surname;
             $email = $request->email;
             $password = $request->password;
-            $roLId = $request->roLId;
+            //$roLId = $request->roLId;
             $userStatus = $request->user_status;
 
             $user = new User();
@@ -50,27 +52,29 @@ class HomeController extends Controller
             $user->surname = $surname;
             $user->email = $email;
             $user->password = Hash::make($password);
-            $user->roLId = $roLId;
+            //$user->roLId = $roLId;
             $user->user_status = $userStatus == 'on' ? 'on' : 'off';
             $user->save();
+            $user->syncRoles($request->role);
+            
 
             Toastr::success('İstifadəçi uqurla əlavə olundu', 'Uqurlu');
             return redirect()->back();
         }catch(\Exception $e){
-            Toastr::error('İstifadəçi əlavə olunarkən xəta baş verdi');
+            Toastr::error('İstifadəçi əlavə olunarkən xəta baş verdi. ' . $e->getMessage());
             return redirect()->back();
         }  
     }
     //list users
     public function userList(){
-        $userLists = User::all();
+        $userLists = User::with('roles')->get();
         return view('admin.users.user_list', compact('userLists'));
     }
     //user edit
     public function userEdit($id){
-       // $roles = Role::all();
+        $roles = Role::all();
         $user = User::find($id) ?? abort(404, 'Belə bir istifadəçi mövcud deyil');
-        return view('admin.users.user-edit', compact('user'));
+        return view('admin.users.user-edit', compact('user', 'roles'));
     }
     //user update
     public function userUpdate(Request $request, $id){
@@ -81,7 +85,7 @@ class HomeController extends Controller
             'surname'=>'required | min:5 | max:25',
             'email'=>'required | email',
             //'password'=>'required | min:8',
-            'roLId'=>'required'
+            //'roLId'=>'required'
         ];
         
         
@@ -95,7 +99,7 @@ class HomeController extends Controller
             $name = $request->name;
             $surname = $request->surname;
             $email = $request->email;
-            $roLId = $request->roLId;
+            //$roLId = $request->roLId;
             $userStatus = $request->user_status;
         
 
@@ -107,13 +111,15 @@ class HomeController extends Controller
             if(!empty($request->password))
                 $user->password = $request->password;
 
-            $user->roLId = $roLId;
+            //$user->roLId = $roLId;
             $user->user_status = $userStatus == 'on' ? 'on' : 'off';
             $user->update();
+            $user->syncRoles($request->role);
+            //$user->roles()->attach($roLId);
             Toastr::success('İstifadəçi uğurla yeniləndi', 'Uqurlu');
             return redirect()->back();
         }catch(\Exception $e){
-            Toastr::error('İstifadəçi yenilənərkən xəta baş verdi');
+            Toastr::error('İstifadəçi yenilənərkən xəta baş verdi .'.$e->getMessage().'');
             return redirect()->back();
         }
         

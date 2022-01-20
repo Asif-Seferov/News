@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use App\Models\Role;
+
 
 class RoleController extends Controller
 {
@@ -16,8 +18,10 @@ class RoleController extends Controller
     }
 
     public function user_role_add_page(){
-        return view('admin.users.user_role_add');
+        $permissions = Permission::all();
+        return view('admin.users.user_role_add', compact('permissions'));
     }
+
     // Add user role
     public function user_role_add(Request $request){
         
@@ -27,16 +31,20 @@ class RoleController extends Controller
             ]);
 
             $userRole = new Role();
-            $userRole->rol_name = $request->user_role;
+            $userRole->name = $request->user_role;
             $userRole->save();
+            $userRole->syncPermissions($request->permissions);
             Toastr::success('İstifadəçi rolu uğurla əlavə olundu', 'Uğurlu');
             return redirect()->back();
     }
+
     // edit user role
     public function edit_user_role($id){
+        $permissions = Permission::all();
         $editRole = Role::find($id) ?? abort(404, 'Belə bir istifadəçi rolu mövcud deyil');
-        return view('admin.users.edit_user_role', compact('editRole'));
+        return view('admin.users.edit_user_role', compact('editRole', 'permissions'));
     }
+
     //update user role
     public function update_user_role(Request $request, $id){
             $request->validate([
@@ -44,8 +52,9 @@ class RoleController extends Controller
             ]);
         try{
             $updateRole = Role::find($id);
-            $updateRole->rol_name = $request->user_role;
+            $updateRole->name = $request->user_role;
             $updateRole->update();
+            $updateRole->syncPermissions($request->permissions);
             Toastr::success('İstifadəçi rolu uğurla yeniləndi', 'Uğurlu');
             return redirect()->back();
         }catch(\Exception $e){
@@ -53,6 +62,7 @@ class RoleController extends Controller
             return redirect()->back();
         }
     }
+
     // delete user role
     public function delete_user_role(Request $request){
         try{
@@ -73,3 +83,4 @@ class RoleController extends Controller
     }
     
 }
+ 

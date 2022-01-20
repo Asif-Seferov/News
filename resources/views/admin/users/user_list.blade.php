@@ -10,8 +10,8 @@
                     <thead>
                         <tr>
                         <th scope="col">Ad, soyad</th>
-                        <th scope="col">Rolu</th>
                         <th scope="col">Statusu</th>
+                        <th scope="col">Rolu</th>
                         <th scope="col">Yaranma tarixi</th>
                         <th scope="col">Seçimlər</th>
                         </tr>
@@ -20,14 +20,22 @@
                         @foreach($userLists as $userList)
                         <tr id="item-{{$userList->id}}">
                             <td> {{ $userList->name.' '.$userList->surname }} </td>
-                            <td> {{ $userList->getRoLId->rol_name }} </td>
                             <td> {{ $userList->user_status }} </td>
+                            <td> 
+                                @foreach($userList->roles as $role)
+                                    {{ $role->name }}
+                                @endforeach
+                            </td>
                             <td> {{ $userList->created_at  }} </td>
+                            
                             <td>
                                 <a href=" {{route('user.edit', $userList->id)}} " class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a> &nbsp;
+                                @can('Silmək')   
                                 <!--<input type="hidden" class="user_delete_value" value=" {{$userList->id}} ">-->
                                 <a href="#" data-id="{{$userList->id}}" data-item="#item-{{$userList->id}}" class="btn btn-danger btn-sm btn_sm_users delete_user"><i class="fas fa-user-minus"></i></a>
+                                @endcan
                             </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>

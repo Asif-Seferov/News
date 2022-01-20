@@ -30,10 +30,10 @@
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <label>Rol</label>
-        <div class="mb-3">
-            <select class="form-control" aria-label="Default select example" name="roLId" value=" {{old('roLId')}} ">
+         <div class="mb-3">
+            <select class="form-control" aria-label="Default select example" name="role" value=" {{old('roLId')}} ">
                 @foreach($roles as $role)
-                <option value=" {{$role->id}} "> {{$role->rol_name}} </option>
+                <option value=" {{$role->name}} "> {{$role->name}} </option>
                 @endforeach
             </select>
         </div>

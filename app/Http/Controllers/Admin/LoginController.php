@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
+//use Brian2694\Toastr\Facades\Toastr;
 class LoginController extends Controller
 {
     //login page
@@ -13,7 +14,7 @@ class LoginController extends Controller
         return view('admin.login.login');
     }
     //login form check 
-    public function login_check(Request $request){
+    public function login_check(Request $request){ //$_POST[""]
         if($request->isMethod('post')){
             $credentials = $request->only('email', 'password');
             $credentials = $request->validate([
@@ -22,7 +23,9 @@ class LoginController extends Controller
             ]);
             if(Auth::attempt($credentials)){
                 $request->session()->regenerate();
-                return redirect()->intended('adminhome');
+                //Toastr::success('Girişiniz təsdiqlənmişdir', 'Uğurlu');
+                return redirect()->route('adminhome');
+                
             }
             return back()->withErrors([
                 'email'=>'Daxil etdiyiniz email və ya şifrə yanlışdır.',

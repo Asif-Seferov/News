@@ -30,9 +30,9 @@
         </div>  -->
         <label>Rol</label>
         <div class="mb-3">
-            <select class="form-control" aria-label="Default select example" name="roLId">
-                @foreach($user->getRoLId->all() as $role)
-                <option value=" {{$role->id}} " @if($role->id === $user->roLId) selected @endif> {{$role->rol_name}} </option>
+            <select class="form-control" aria-label="Default select example" name="role">
+                @foreach($roles->all() as $role)
+                <option value=" {{$role->name}} " @if($user->HasRole($role->name)) selected @endif> {{$role->name}} </option>
                 @endforeach
             </select>
         </div>
